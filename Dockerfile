@@ -35,12 +35,7 @@ RUN mkdir -p /usr/src/criu \
     && make install-criu
 
 # setup a playground for us to spawn containers in
-ENV ROOTFS /busybox
-RUN mkdir -p ${ROOTFS} \
-    && curl -o- -sSL 'https://github.com/jpetazzo/docker-busybox/raw/buildroot-2014.11/rootfs.tar' | tar -C ${ROOTFS} -xf -
+RUN mkdir -p /mycontainer/rootfs
+RUN curl -o- -sSL 'https://github.com/jpetazzo/docker-busybox/raw/buildroot-2014.11/rootfs.tar' | tar -C /mycontainer/rootfs -xf -
 
-COPY script/tmpmount /
 WORKDIR /go/src/github.com/opencontainers/runc
-ENTRYPOINT ["/tmpmount"]
-
-ADD . /go/src/github.com/opencontainers/runc

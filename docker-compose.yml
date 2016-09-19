@@ -1,0 +1,18 @@
+version: "2"
+
+services:
+  dev:
+    build: .
+    volumes:
+      - ./:/go/src/github.com/opencontainers/runc
+    privileged: true
+
+# Example:
+# $ docker-compose run --rm dev bash
+# $# make && make install
+# $# cd /mycontainer
+# $# runc spec
+# $# runc run testcon
+#   / # uname -a
+#   Linux runc 4.4.0-36-generic #55-Ubuntu SMP Thu Aug 11 18:01:55 UTC 2016 x86_64 GNU/Linux
+#   / # exit
